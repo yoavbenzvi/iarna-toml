@@ -52,7 +52,7 @@ function stringifyObject (prefix, indent, obj) {
     }
   })
   if (result.length > 0) result.push('')
-  const complexIndent = prefix && inlineKeys.length > 0 ? indent + '  ' : ''
+  const complexIndent = prefix && inlineKeys.length > 0 ? indent + '' : ''
   complexKeys.forEach(key => {
     result.push(stringifyComplex(prefix, complexIndent, key, obj[key]))
   })
@@ -255,7 +255,9 @@ function stringifyArrayOfTables (prefix, indent, key, values) {
   values.forEach(table => {
     if (result.length > 0) result += '\n'
     result += indent + '[[' + fullKey + ']]\n'
-    result += stringifyObject(fullKey + '.', indent, table)
+    if (table) {
+      result += stringifyObject(fullKey + '.', indent, table)
+    }
   })
   return result
 }
