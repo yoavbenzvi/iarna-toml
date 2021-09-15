@@ -176,9 +176,13 @@ function stringifyInline (value, type) {
     case 'datetime':
       return stringifyDatetime(value)
     case 'array':
-      return stringifyInlineArray(value.filter(_ => tomlType(_) !== 'null' && tomlType(_) !== 'undefined' && tomlType(_) !== 'nan'))
+      return stringifyInlineArray(value)
     case 'table':
       return stringifyInlineTable(value)
+    case 'undefined':
+      return '[]'
+    case 'null':
+      return '[]'
     /* istanbul ignore next */
     default:
       throw typeError(type)
